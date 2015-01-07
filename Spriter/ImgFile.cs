@@ -86,17 +86,22 @@ namespace Spriter
                     }
                     for (UInt16 i = 0; i < numSprites; i++)
                     {
-                        
-                        Bitmap bmp = new Bitmap((int)(width[i]), (int)(height[i]));
-                        for (UInt16 y = 0; y < height[i]; y++)
+                        try
                         {
-                            for (UInt16 x = 0; x < width[i]; x++)
+                            Bitmap bmp = new Bitmap((int)(width[i]), (int)(height[i]));
+                            for (UInt16 y = 0; y < height[i]; y++)
                             {
-                                Byte col = br.ReadByte();
-                                bmp.SetPixel(x, y, pal[col]);
+                                for (UInt16 x = 0; x < width[i]; x++)
+                                {
+                                    Byte col = br.ReadByte();
+                                    bmp.SetPixel(x, y, pal[col]);
+                                }
                             }
+                            sprites.Add(bmp);
                         }
-                        sprites.Add(bmp);
+                        catch (Exception ex) {
+                            System.Diagnostics.Debug.WriteLine(ex.Message);
+                        }
                     }
                     break;
                 case PixelFormat.Format16bppRgb565:
