@@ -46,7 +46,7 @@ namespace Spriter
             {
                 return;
             }
-            foreach (String fn in openFileDialog1.FileNames)
+            foreach (string fn in openFileDialog1.FileNames)
             {
                 // MessageBox.Show(openFileDialog1.FileName);
                 LoadImage(fn);
@@ -91,7 +91,7 @@ namespace Spriter
 
         private void deleteButton_Click(object sender, EventArgs e)
         {
-            // String msg = "";
+            // string msg = "";
             int deleted = 0;
             foreach (int i in spriteView.SelectedIndices)
             {
@@ -133,10 +133,10 @@ namespace Spriter
 
 
 
-        private bool LoadImage(String FileName)
+        private bool LoadImage(string FileName)
         {
-            String FileExt = FileName.Substring(FileName.IndexOf(".")).ToLower();
-            String imgKey;
+            string FileExt = FileName.Substring(FileName.IndexOf(".")).ToLower();
+            string imgKey;
 
             if (FileExt == ".pal")
             {
@@ -149,7 +149,7 @@ namespace Spriter
             if (FileExt == ".img")
             {
                 ImgFile imgf = new ImgFile();
-                String palFN = FileName.Substring(0, FileName.IndexOf(".")) + ".pal";
+                string palFN = FileName.Substring(0, FileName.IndexOf(".")) + ".pal";
                 if (System.IO.File.Exists(palFN))
                 {
                     pal = new PaletteFile(palFN);
@@ -191,7 +191,7 @@ namespace Spriter
                     imageList1.Images.Add(imgKey, bmp);
                     sprites.Add(bmp);
 
-                    spriteView.Items.Add(String.Format("{0}:{1}", FileName, idx), imgKey);
+                    spriteView.Items.Add(string.Format("{0}:{1}", FileName, idx), imgKey);
 
                 }
                 spriteView.EndUpdate();
@@ -210,7 +210,7 @@ namespace Spriter
             {
                 return false;
             }
-            imgKey = String.Format("Image{0}", key);
+            imgKey = string.Format("Image{0}", key);
             key++;
             imageList1.Images.Add(imgKey, sprite);
 
@@ -224,7 +224,7 @@ namespace Spriter
         private void explodeImage(int idx, int w, int h)
         {
             Bitmap bmp1 = (Bitmap)(sprites[idx]);
-            String title = spriteView.Items[idx].Text;
+            string title = spriteView.Items[idx].Text;
             int number = 0;
             spriteView.BeginUpdate();
             for (int y = 0; y < bmp1.Height; y += h)
@@ -235,12 +235,12 @@ namespace Spriter
                     Rectangle rect = new Rectangle(x, y, w, h);
                     Bitmap bmp2 = bmp1.Clone(rect, bmp1.PixelFormat);
 
-                    String imgKey = String.Format("Image{0}", key);
+                    string imgKey = String.Format("Image{0}", key);
                     key++;
 
                     imageList1.Images.Add(imgKey, bmp2);
                     sprites.Add(bmp2);
-                    spriteView.Items.Add(String.Format("{0}:{1}", title, number), imgKey);
+                    spriteView.Items.Add(string.Format("{0}:{1}", title, number), imgKey);
 
                     number++;
                 }
